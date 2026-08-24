@@ -1,0 +1,4 @@
+import {createContext,useContext,useState} from 'react'; import api from '../api/client';
+const C=createContext(null);
+export function AuthProvider({children}){const [user,setUser]=useState(()=>JSON.parse(localStorage.getItem('user')||'null')); const login=async(email,password)=>{const r=await api.post('/api/auth/login',new URLSearchParams({username:email,password}));localStorage.setItem('token',r.data.access_token);localStorage.setItem('user',JSON.stringify(r.data));setUser(r.data)}; const register=async(data)=>{const r=await api.post('/api/auth/register',data);localStorage.setItem('token',r.data.access_token);localStorage.setItem('user',JSON.stringify(r.data));setUser(r.data)}; const logout=()=>{localStorage.clear();setUser(null)}; return <C.Provider value={{user,login,register,logout}}>{children}</C.Provider>}
+export const useAuth=()=>useContext(C);

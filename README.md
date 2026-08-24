@@ -27,7 +27,7 @@ Demo accounts:
 ### Frontend
 ```bash
 cd frontend
-npm ci
+npm install
 cp .env.example .env
 npm run dev
 ```
@@ -44,4 +44,12 @@ npm run dev
 - Email notifications on every status change plus optional Twilio SMS.
 - Admin order filtering and status override.
 
-See `system-design.md` for the requested architecture write-up and `backend/tests/` for automated coverage.
+## Deployment
+
+The backend includes a Render blueprint and Dockerfile; the frontend includes Vercel SPA routing. A hosted application URL was not supplied or deployed by this task, so none is claimed here.
+
+## Testing
+
+Run `cd backend && pytest -q`. Core tests cover volumetric-weight calculation and the lifecycle state machine. Full API integration tests require the dependencies in `backend/requirements.txt`.
+
+See `system-design.md` for the requested architecture write-up.
